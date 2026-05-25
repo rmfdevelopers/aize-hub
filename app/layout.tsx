@@ -1,26 +1,31 @@
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
-import './globals.css';
+import type { Metadata } from "next";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import "./globals.css";
 
 const heading = Cormorant_Garamond({ 
-  subsets: ['latin'], 
-  weight: ['300', '400', '500', '600', '700'], 
-  variable: '--font-heading' 
+  subsets: ["latin"], 
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-heading" 
 });
 
 const body = DM_Sans({ 
-  subsets: ['latin'], 
-  variable: '--font-body' 
+  subsets: ["latin"], 
+  variable: "--font-body" 
 });
 
-export const metadata = {
-  title: 'Aize Hub | Original Italian Gold Jewelry',
-  description: 'Exquisite Italian gold and fine jewelry curated for investors in Nigeria.',
+export const metadata: Metadata = {
+  title: "Aize Hub | Investment for A Lifetime",
+  description: "Exquisite Italian gold curated for the discerning collector. Timeless elegance meets enduring value in every piece.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${heading.variable} ${body.variable} font-sans bg-black text-accent`}>
+    <html lang="en">
+      <body className={`${heading.variable} ${body.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

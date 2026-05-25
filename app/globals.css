@@ -2,32 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme {
-  --color-primary: #D4AF37;
-  --color-secondary: #1A1A1A;
-  --color-accent: #F5F5F5;
-}
-
 :root {
-  --primary: #D4AF37;
-  --secondary: #1A1A1A;
-  --accent: #F5F5F5;
+  --primary: #121212;
+  --secondary: #D4AF37;
+  --accent: #F5F5F0;
 }
 
-html { scroll-behavior: smooth; }
-body { 
-  overflow-x: hidden; 
-  font-family: var(--font-body); 
-  background: #000000; 
-  color: #F5F5F5; 
+html {
+  scroll-behavior: smooth;
 }
 
-h1, h2, h3, h4 { font-family: var(--font-heading); }
+body {
+  background-color: var(--primary);
+  color: var(--accent);
+  overflow-x: hidden;
+}
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 @keyframes slide-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
@@ -36,11 +30,32 @@ h1, h2, h3, h4 { font-family: var(--font-heading); }
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-slide-left { animation: slide-left 40s linear infinite; }
 
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-
-.clip-reveal {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
-.clip-reveal.visible { clip-path: inset(0 0 0 0); }
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.curtain-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.curtain-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--secondary);
+  transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 50;
+}
+
+.curtain-reveal.revealed::after {
+  transform: translateY(-100%);
+}
